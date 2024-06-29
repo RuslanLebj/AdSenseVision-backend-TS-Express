@@ -1,9 +1,16 @@
 {
-  "name": "adsensevision_backend_express_ts",
+  "name": "adsensevision_backend_ts_express",
   "version": "1.0.0",
-  "main": "src/index.js",
+  "main": "dist/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "rimraf dist && npx tsc",
+    "prestart": "npm run build",
+    "start": "node dist/index.js",
+    "watch": "npx tsc -w",
+    "dev:concurrent": "concurrently \"npm run watch\" \"nodemon dist/index.js\"",
+    "dev:ts-node": "nodemon src/index.ts",
+    "dev": "npm run dev:ts-node"
   },
   "keywords": [],
   "author": "",
@@ -16,6 +23,10 @@
   "devDependencies": {
     "@types/express": "^4.17.21",
     "@types/node": "^20.14.9",
+    "concurrently": "^8.2.2",
+    "nodemon": "^3.1.4",
+    "rimraf": "^5.0.7",
+    "ts-node": "^10.9.2",
     "typescript": "^5.5.2"
   }
 }
