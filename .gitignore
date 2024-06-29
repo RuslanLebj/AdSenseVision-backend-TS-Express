@@ -1,0 +1,19 @@
+# Dependency directory
+node_modules
+
+# Ignore built ts files
+dist
+
+# API keys and secrets
+.env
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
