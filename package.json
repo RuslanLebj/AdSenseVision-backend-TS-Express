@@ -8,9 +8,9 @@
     "prestart": "npm run build",
     "start": "node dist/index.js",
     "watch": "npx tsc -w",
-    "dev:concurrent": "concurrently \"npm run watch\" \"nodemon dist/index.js\"",
-    "dev:ts-node": "nodemon src/index.ts",
-    "dev": "npm run dev:ts-node",
+    "dev:watch-and-serve": "concurrently \"npm run watch\" \"nodemon dist/index.js\"",
+    "dev:serve": "nodemon",
+    "dev": "npm run dev:serve",
     "migrate": "npx knex migrate:latest"
   },
   "keywords": [],
