@@ -9,7 +9,7 @@ dotenv.config({ path: path.resolve(__dirname, '../../.env') });
 //console.log(process.env)
 
 // Update with your config settings.
-const config: { [key: string]: Knex.Config } = {
+export const config: { [key: string]: Knex.Config } = {
     development: {
         client: 'pg',
         connection: {
@@ -31,5 +31,3 @@ const config: { [key: string]: Knex.Config } = {
         }
     },
 };
-
-module.exports = config;
