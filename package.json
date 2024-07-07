@@ -11,7 +11,7 @@
     "dev:compile-and-serve": "concurrently \"npm run watch\" \"nodemon dist/index.js\"",
     "dev:serve": "nodemon",
     "dev": "npm run dev:serve",
-    "migrate": "npx knex migrate:latest"
+    "migrate": "npx knex migrate:latest --knexfile=src/db/knexfile.ts"
   },
   "keywords": [],
   "author": "",
