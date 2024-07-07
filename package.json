@@ -10,7 +10,8 @@
     "watch": "npx tsc -w",
     "dev:concurrent": "concurrently \"npm run watch\" \"nodemon dist/index.js\"",
     "dev:ts-node": "nodemon src/index.ts",
-    "dev": "npm run dev:ts-node"
+    "dev": "npm run dev:ts-node",
+    "migrate": "npx knex migrate:latest"
   },
   "keywords": [],
   "author": "",
