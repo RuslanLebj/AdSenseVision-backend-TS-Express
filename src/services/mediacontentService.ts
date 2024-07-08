@@ -11,15 +11,15 @@ export class MediacontentService {
         return this.mediacontentRepository.getAll();
     }
 
-    async getMediacontentById(id: number): Promise<any> {
+    async getMediacontentById(id: string): Promise<any> {
         return this.mediacontentRepository.getById(id);
     }
 
-    async updateMediacontent(id: number, mediacontentData: any): Promise<any> {
+    async updateMediacontent(id: string, mediacontentData: any): Promise<any> {
         return this.mediacontentRepository.update(id, mediacontentData);
     }
 
-    async deleteMediacontent(id: number): Promise<any> {
+    async deleteMediacontent(id: string): Promise<any> {
         return this.mediacontentRepository.delete(id);
     }
 }

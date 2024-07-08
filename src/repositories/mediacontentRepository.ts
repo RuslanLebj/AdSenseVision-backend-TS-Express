@@ -18,14 +18,14 @@ export class MediacontentRepository {
         return this.knex(this.tableName).select('*');
     }
 
-    async getById(id: number): Promise<MediacontentEntity | null> {
+    async getById(id: string): Promise<MediacontentEntity | null> {
         const mediacontent = await this.knex(this.tableName)
             .where({ id })
             .first();
         return mediacontent || null;
     }
 
-    async update(id: number, data: Partial<MediacontentEntity>): Promise<MediacontentEntity | null> {
+    async update(id: string, data: Partial<MediacontentEntity>): Promise<MediacontentEntity | null> {
         const [updatedMediacontent] = await this.knex(this.tableName)
             .where({ id })
             .update(data)
@@ -33,7 +33,7 @@ export class MediacontentRepository {
         return updatedMediacontent || null;
     }
 
-    async delete(id: number): Promise<MediacontentEntity | null> {
+    async delete(id: string): Promise<MediacontentEntity | null> {
         const [deletedMediacontent] = await this.knex(this.tableName)
             .where({ id })
             .delete()

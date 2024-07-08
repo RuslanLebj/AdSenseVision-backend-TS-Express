@@ -1,6 +1,6 @@
 export interface MediacontentEntity {
-    id: number;
-    video: string;
+    id?: number;
+    video?: string;
     name?: string;
     description?: string;
     upload_date?: string;
