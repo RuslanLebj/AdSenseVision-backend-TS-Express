@@ -9,7 +9,7 @@ dotenv.config({ path: path.resolve(__dirname, '../../.env') });
 //console.log(process.env)
 
 // Update with your config settings.
-export const config: { [key: string]: Knex.Config } = {
+const config: { [key: string]: Knex.Config } = {
     development: {
         client: 'pg',
         connection: {
@@ -31,3 +31,6 @@ export const config: { [key: string]: Knex.Config } = {
         }
     },
 };
+
+// typescript export default is not supported by knex cli by default.
+module.exports = config;

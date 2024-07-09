@@ -1,6 +1,6 @@
-import knex from 'knex';
-import {config} from './knexfile';
+const knex = require("knex")
+const knexfile = require("./knexfile")
 
-const db = knex(config.development);
-
-export default db;
+const db = knex(knexfile.development)
+// typescript export default is not supported by knex cli by default.
+module.exports = db
