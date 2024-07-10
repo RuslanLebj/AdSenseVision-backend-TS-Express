@@ -1,12 +1,20 @@
 import express, {Express, Request, Response,  NextFunction} from "express";
 import dotenv from "dotenv";
 import bodyParser from 'body-parser';
-import {mediacontentRoutes} from './routes/mediacontentRoutes';
 import {handleError} from './utils/errorHandler';
-import { MediacontentService } from './services/mediacontentService';
-import mediacontentRepository from './repositories/mediacontentRepository';
-import { MediacontentController } from './controllers/mediacontentController';
 import upload from './middleware/uploadMiddleware';
+import {mediacontentRoutes} from './routes/mediacontentRoutes';
+import {cameraRoutes} from './routes/cameraRoutes';
+import {screenRoutes} from './routes/screenRoutes';
+import { MediacontentService } from './services/mediacontentService';
+import { CameraService } from './services/cameraService';
+import { ScreenService } from './services/screenService';
+import mediacontentRepository from './repositories/mediacontentRepository';
+import cameraRepository from './repositories/cameraRepository';
+import screenRepository from './repositories/screenRepository';
+import { MediacontentController } from './controllers/mediacontentController';
+import { CameraController } from './controllers/cameraController';
+import { ScreenController } from './controllers/screenController';
 
 // В app.ts переменные окружения могут быть найдены автоматически
 // - если ваш app.ts находится в каталоге, откуда запускается Node.js, dotenv сможет найти файл .env без указания явного пути.
@@ -22,14 +30,20 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // Статическая маршрутизация для файлов в директории 'uploads'
 app.use('/uploads', express.static('uploads'));
 
-// MEDIACONTENT
-// Создаем экземпляр сервиса и контроллера
+// Mediacontent
 const mediacontentService = new MediacontentService(mediacontentRepository);
 const mediacontentController = new MediacontentController(mediacontentService);
-// Передаем экземпляр контроллера в маршруты
 app.use('/api', mediacontentRoutes(mediacontentController));
 
+// Camera
+const cameraService = new CameraService(cameraRepository);
+const cameraController = new CameraController(cameraService);
+app.use('/api', cameraRoutes(cameraController));
 
+// Screen
+const screenService = new ScreenService(screenRepository);
+const screenController = new ScreenController(screenService);
+app.use('/api', screenRoutes(screenController));
 
 app.get('/', (req: Request, res: Response) => {
     res.send('Welcome to the API');
