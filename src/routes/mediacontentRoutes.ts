@@ -8,7 +8,7 @@ export const mediacontentRoutes = (mediacontentController: MediacontentControlle
     router.post('/mediacontent', upload.single('video'), mediacontentController.createMediacontent);
     router.get('/mediacontent', mediacontentController.getAllMediacontent);
     router.get('/mediacontent/:id', mediacontentController.getMediacontentById);
-    router.put('/mediacontent/:id', mediacontentController.updateMediacontent);
+    router.patch('/mediacontent/:id', mediacontentController.updateMediacontent);
     router.delete('/mediacontent/:id', mediacontentController.deleteMediacontent);
 
     return router;

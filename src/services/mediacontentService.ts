@@ -1,4 +1,5 @@
 import { MediacontentRepository } from '../repositories/mediacontentRepository';
+import {MediacontentEntity} from "../entities/mediacontentEntity";
 
 export class MediacontentService {
     constructor(private mediacontentRepository: MediacontentRepository) {}
@@ -16,7 +17,11 @@ export class MediacontentService {
     }
 
     async updateMediacontent(id: string, mediacontentData: any): Promise<any> {
-        return this.mediacontentRepository.update(id, mediacontentData);
+        const updateData: Partial<MediacontentEntity> = {
+            name: mediacontentData.name,
+            description: mediacontentData.description
+        };
+        return this.mediacontentRepository.update(id, updateData);
     }
 
     async deleteMediacontent(id: string): Promise<any> {
