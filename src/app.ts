@@ -1,4 +1,4 @@
-import express, {Express, Request, Response,  NextFunction} from "express";
+import express, {Express, Request, Response, NextFunction} from "express";
 import dotenv from "dotenv";
 import bodyParser from 'body-parser';
 import {handleError} from './utils/errorHandler';
@@ -6,15 +6,19 @@ import upload from './middleware/uploadMiddleware';
 import {mediacontentRoutes} from './routes/mediacontentRoutes';
 import {cameraRoutes} from './routes/cameraRoutes';
 import {screenRoutes} from './routes/screenRoutes';
-import { MediacontentService } from './services/mediacontentService';
-import { CameraService } from './services/cameraService';
-import { ScreenService } from './services/screenService';
+import {broadcastStationRoutes} from "./routes/broadcastStationRoutes";
+import {MediacontentService} from './services/mediacontentService';
+import {CameraService} from './services/cameraService';
+import {ScreenService} from './services/screenService';
+import {BroadcastStationService} from './services/broadcastStationService';
 import mediacontentRepository from './repositories/mediacontentRepository';
 import cameraRepository from './repositories/cameraRepository';
 import screenRepository from './repositories/screenRepository';
-import { MediacontentController } from './controllers/mediacontentController';
-import { CameraController } from './controllers/cameraController';
-import { ScreenController } from './controllers/screenController';
+import broadcastStationRepository from './repositories/broadcastStationRepository';
+import {MediacontentController} from './controllers/mediacontentController';
+import {CameraController} from './controllers/cameraController';
+import {ScreenController} from './controllers/screenController';
+import {BroadcastStationController} from './controllers/broadcastStationController';
 
 // В app.ts переменные окружения могут быть найдены автоматически
 // - если ваш app.ts находится в каталоге, откуда запускается Node.js, dotenv сможет найти файл .env без указания явного пути.
@@ -25,7 +29,7 @@ const app: Express = express();
 
 // Middleware для обработки тела запроса
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({extended: true}));
 
 // Статическая маршрутизация для файлов в директории 'uploads'
 app.use('/uploads', express.static('uploads'));
@@ -44,6 +48,11 @@ app.use('/api', cameraRoutes(cameraController));
 const screenService = new ScreenService(screenRepository);
 const screenController = new ScreenController(screenService);
 app.use('/api', screenRoutes(screenController));
+
+// Broadcast station
+const broadcastStationService = new BroadcastStationService(broadcastStationRepository);
+const broadcastStationController = new BroadcastStationController(broadcastStationService);
+app.use('/api', broadcastStationRoutes(broadcastStationController));
 
 app.get('/', (req: Request, res: Response) => {
     res.send('Welcome to the API');
