@@ -3,19 +3,19 @@ import dotenv from "dotenv";
 import bodyParser from 'body-parser';
 import {handleError} from './utils/errorHandler';
 import upload from './middleware/uploadMiddleware';
-import {mediacontentRoutes} from './routes/mediacontentRoutes';
+import {mediaContentRoutes} from './routes/mediaContentRoutes';
 import {cameraRoutes} from './routes/cameraRoutes';
 import {screenRoutes} from './routes/screenRoutes';
 import {broadcastStationRoutes} from "./routes/broadcastStationRoutes";
-import {MediacontentService} from './services/mediacontentService';
+import {MediaContentService} from './services/mediaContentService';
 import {CameraService} from './services/cameraService';
 import {ScreenService} from './services/screenService';
 import {BroadcastStationService} from './services/broadcastStationService';
-import mediacontentRepository from './repositories/mediacontentRepository';
+import mediaContentRepository from './repositories/mediaContentRepository';
 import cameraRepository from './repositories/cameraRepository';
 import screenRepository from './repositories/screenRepository';
 import broadcastStationRepository from './repositories/broadcastStationRepository';
-import {MediacontentController} from './controllers/mediacontentController';
+import {MediaContentController} from './controllers/mediaContentController';
 import {CameraController} from './controllers/cameraController';
 import {ScreenController} from './controllers/screenController';
 import {BroadcastStationController} from './controllers/broadcastStationController';
@@ -35,9 +35,9 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use('/uploads', express.static('uploads'));
 
 // Mediacontent
-const mediacontentService = new MediacontentService(mediacontentRepository);
-const mediacontentController = new MediacontentController(mediacontentService);
-app.use('/api', mediacontentRoutes(mediacontentController));
+const mediaContentService = new MediaContentService(mediaContentRepository);
+const mediaContentController = new MediaContentController(mediaContentService);
+app.use('/api', mediaContentRoutes(mediaContentController));
 
 // Camera
 const cameraService = new CameraService(cameraRepository);

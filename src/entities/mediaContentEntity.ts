@@ -1,4 +1,4 @@
-export interface MediacontentEntity {
+export interface MediaContentEntity {
     id?: number;
     video?: string;
     name?: string;
