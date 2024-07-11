@@ -1,6 +1,8 @@
 import { Knex } from 'knex';
 import db from '../db/db';
 import { BroadcastStationEntity } from '../entities/broadcastStationEntity';
+import { CameraEntity } from '../entities/cameraEntity';
+import { ScreenEntity } from '../entities/screenEntity';
 
 export class BroadcastStationRepository {
     private readonly tableName = 'broadcast_station';
@@ -15,14 +17,15 @@ export class BroadcastStationRepository {
     }
 
     async getAll(): Promise<BroadcastStationEntity[]> {
-        return this.knex(this.tableName).select('*');
+        const broadcastStations = await this.knex(this.tableName).select('*');
+        return Promise.all(broadcastStations.map(station => this.getDetails(station)));
     }
 
     async getById(id: string): Promise<BroadcastStationEntity | null> {
         const broadcastStation = await this.knex(this.tableName)
             .where({ id })
             .first();
-        return broadcastStation || null;
+        return broadcastStation ? this.getDetails(broadcastStation) : null;
     }
 
     async update(id: string, data: Partial<BroadcastStationEntity>): Promise<BroadcastStationEntity | null> {
@@ -30,7 +33,7 @@ export class BroadcastStationRepository {
             .where({ id })
             .update(data)
             .returning('*');
-        return updatedBroadcastStation || null;
+        return updatedBroadcastStation ? this.getDetails(updatedBroadcastStation) : null;
     }
 
     async delete(id: string): Promise<BroadcastStationEntity | null> {
@@ -38,7 +41,13 @@ export class BroadcastStationRepository {
             .where({ id })
             .delete()
             .returning('*');
-        return deletedBroadcastStation || null;
+        return deletedBroadcastStation ? this.getDetails(deletedBroadcastStation) : null;
+    }
+
+    private async getDetails(station: BroadcastStationEntity): Promise<BroadcastStationEntity> {
+        const camera = await this.knex<CameraEntity>('camera').where({ id: station.camera_id }).first();
+        const screen = await this.knex<ScreenEntity>('screen').where({ id: station.screen_id }).first();
+        return { ...station, camera, screen };
     }
 }
 
