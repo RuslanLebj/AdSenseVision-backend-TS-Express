@@ -1,5 +1,15 @@
+# Users media files
+uploads
+
 # Dependency directory
 node_modules
+
+# Ignore file
+.dockerignore
+.gitignore
+
+# Built ts files
+dist
 
 # Editor directories and files
 .vscode/*
