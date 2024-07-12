@@ -54,6 +54,7 @@ const broadcastStationService = new BroadcastStationService(broadcastStationRepo
 const broadcastStationController = new BroadcastStationController(broadcastStationService);
 app.use('/api', broadcastStationRoutes(broadcastStationController));
 
+// Маршрут по умолчанию
 app.get('/', (req: Request, res: Response) => {
     res.send('Welcome to the API');
 });
@@ -61,11 +62,6 @@ app.get('/', (req: Request, res: Response) => {
 // Обработка ошибок
 app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
     handleError(res, err);
-});
-
-// Маршрут по умолчанию
-app.get('/', (req: Request, res: Response) => {
-    res.send('Welcome to the API');
 });
 
 
