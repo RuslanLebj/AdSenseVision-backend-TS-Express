@@ -1,11 +1,11 @@
 # Users media files
-uploads
+uploads/
 
 # Dependency directory
-node_modules
+node_modules/
 
 # Ignore built ts files
-dist
+dist/
 
 # API keys and secrets
 .env

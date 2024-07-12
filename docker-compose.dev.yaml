@@ -1,0 +1,19 @@
+version: '1.0'
+
+services:
+  backend:
+    build:
+      context: .
+      target: development
+    volumes:
+      - ./:/app
+      # Том ./:/app:
+      # Монтирует текущую директорию на хосте в /app внутри контейнера.
+      # Это позволяет автоматически обновлять код в контейнере при изменении файлов на хосте.
+      - /app/node_modules
+      # /app/node_modules:
+      # Монтирует директорию node_modules в контейнере.
+      # Это позволяет избежать пересборки и переустановки зависимостей при каждом запуске контейнера.
+    ports:
+      - "${EXPRESS_PORT}:${EXPRESS_PORT}"
+    command: npm run dev
