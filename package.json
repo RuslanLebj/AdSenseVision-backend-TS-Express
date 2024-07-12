@@ -5,11 +5,12 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "rimraf dist && npx tsc",
-    "prestart": "npm run build",
+    "about:prestart": "Автоматически запускается перед start (отключить при запуске через docker) ",
     "start": "node dist/app.js",
     "watch": "npx tsc -w",
     "dev:compile-and-serve": "concurrently \"npm run watch\" \"nodemon dist/app.js\"",
     "dev:serve": "nodemon",
+    "about:dev:serve": "Запуск nodemon с настройкми по умолчанию (nodemon.json)",
     "dev": "npm run dev:serve",
     "migrate": "npx knex migrate:latest --knexfile=src/db/knexfile.ts"
   },

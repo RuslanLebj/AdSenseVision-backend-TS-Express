@@ -1,10 +1,29 @@
 version: '1.0'
 
 services:
+#  db:
+#    image: postgres:16
+#    ports:
+#      - "${POSTGRES_DB_PORT}:${POSTGRES_DB_PORT}"
+#    environment:
+#      POSTGRES_DB: "${POSTGRES_DB_NAME}"
+#      POSTGRES_USER: "${POSTGRES_DB_USER}"
+#      POSTGRES_PASSWORD: "${POSTGRES_DB_PASSWORD}"
+##      PGDATA: pgsql-data:/var/lib/postgresql/data/pgdata
+##    volumes:
+##      - pgsql-data:/var/lib/postgresql/data/pgdata
+#    container_name: adsensevision-db
+#  migrations:
+#    build:
+#      context: .
+##    volumes:
+##      - ./migrations:/opt/node/migrations
+#    container_name: adsensevision-db-migrations
+#    command: npm run migrate
   backend:
     build:
       context: .
       target: production
-
     ports:
       - "${EXPRESS_PORT}:${EXPRESS_PORT}"
+    command: npm run start
