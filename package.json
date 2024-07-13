@@ -5,7 +5,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "rimraf dist && npx tsc",
-    "about:prestart": "Автоматически запускается перед start (отключить при запуске через docker) ",
+    "about:prestart": "Автоматически запускается перед start 'npm run build' (отключить при запуске через docker) ",
     "start": "node dist/app.js",
     "watch": "npx tsc -w",
     "dev:compile-and-serve": "concurrently \"npm run watch\" \"nodemon dist/app.js\"",
