@@ -5,12 +5,14 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "rimraf dist && npx tsc",
-    "about:prestart": "Автоматически запускается перед start 'npm run build' (отключить при запуске через docker) ",
+    "about:prestart": "echo \"Автоматически запускается перед start 'npm run build' (отключить при запуске через docker)\" && exit 1",
     "start": "node dist/app.js",
     "watch": "npx tsc -w",
     "dev:compile-and-serve": "concurrently \"npm run watch\" \"nodemon dist/app.js\"",
     "dev:serve": "nodemon",
-    "about:dev:serve": "Запуск nodemon с настройкми по умолчанию (nodemon.json)",
+    "about:dev:serve": "echo \"Запуск nodemon с настройкми по умолчанию (nodemon.json)\" && exit 1",
+    "dev:docker": "nodemon --legacy-watch",
+    "about:dev:docker": "echo \"Application isn't restarting: \nIn some networked environments (such as a container running nodemon reading across a mounted drive), you will need to use the legacyWatch: true which enables Chokidar's polling. \n \nVia the CLI, use either --legacy-watch or -L for short: \nnodemon -L \nThough this should be a last resort as it will poll every file it can find. \nОпция --legacy-watch для nodemon используется в ситуациях, когда стандартный механизм отслеживания изменений файлов не работает должным образом. Это может происходить по нескольким причинам, особенно при работе с Docker-контейнерами.\" && exit 1",
     "dev": "npm run dev:serve",
     "migrate": "npx knex migrate:latest --knexfile=src/db/knexfile.ts"
   },
