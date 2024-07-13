@@ -1,5 +1,6 @@
-# Сборка образа для сборки приложения/разработки
-FROM node:20-alpine AS development
+# Multi-stage build
+# Build stage - Сборка образа для сборки приложения/разработки
+FROM node:20-alpine AS build
 
 # Указываем рабочую директорию
 WORKDIR /app
@@ -16,7 +17,7 @@ COPY . .
 # Собираем приложение
 RUN npm run build
 
-# Начинаем сборку образа для продакшн
+# Production stage - сборку  образа для продакшн
 FROM node:20-alpine AS production
 
 # Устанавливаем рабочую директорию
@@ -38,7 +39,7 @@ COPY package*.json .
 RUN npm install --only=production
 
 # Копируем собранное приложение из предыдущего образа (образ сборки)
-COPY --from=development /app/dist .dist
+COPY --from=build /app/dist .dist
 
 # Устанавливаем глобально менеджер процессов Node.js PM2
 RUN npm install pm2 -g

@@ -56,7 +56,7 @@ app.use('/api', broadcastStationRoutes(broadcastStationController));
 
 // Маршрут по умолчанию
 app.get('/', (req: Request, res: Response) => {
-    res.send('Welcome to the API');
+    res.send('Welcome to the API!!!');
 });
 
 // Обработка ошибок
